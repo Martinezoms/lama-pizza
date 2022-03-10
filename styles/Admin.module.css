@@ -1,0 +1,35 @@
+.container {
+  padding: 50px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  flex: 1;
+}
+
+.title {
+  text-align: center;
+}
+
+.table {
+  width: 100%;
+  border-spacing: 20px;
+  text-align: center;
+}
+
+.button {
+  border: none;
+  color: white;
+  padding: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.button {
+  background-color: crimson;
+}
+
+.button:first-child {
+  background-color: teal;
+}
