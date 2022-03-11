@@ -1,9 +1,13 @@
 import axios from "axios";
 import Head from "next/head";
+import { useState } from "react";
+import AddButton from "../components/AddButton";
+import AddModal from "../components/AddModal";
 import Featured from "../components/Featured";
 import PizzaList from "../components/PizzaList";
 
-export default function Home({ pizzaList }) {
+export default function Home({ pizzaList, admin }) {
+  const [close, setClose] = useState(true);
   return (
     <div>
       <Head>
@@ -12,16 +16,26 @@ export default function Home({ pizzaList }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Featured />
+      {admin && <AddButton setClose={setClose} />}
       <PizzaList pizzaList={pizzaList} />
+      {!close && <AddModal setClose={setClose} />}
     </div>
   );
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (ctx) => {
+  const myCookie = ctx.req?.cookies;
+  let admin = false;
+
+  if (myCookie === process.env.TOKEN) {
+    admin = true;
+  }
+
   const response = await axios.get("http://localhost:3000/api/products");
   return {
     props: {
-      pizzaList: response.data
+      pizzaList: response.data,
+      admin
     }
   };
 };

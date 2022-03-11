@@ -7,8 +7,11 @@ async function handler(req, res) {
   const {
     method,
     body,
-    query: { id }
+    query: { id },
+    cookies
   } = req;
+
+  const token = cookies.token;
 
   await dbConnect();
 
@@ -22,6 +25,10 @@ async function handler(req, res) {
   }
 
   if (method === "PUT") {
+    if (!token || token !== process.env.TOKEN) {
+      return res.status(401).json("Not authenticated");
+    }
+
     try {
       const product = await Product.findByIdAndUpdate(id, body, { new: true });
       res.status(200).json(product);
@@ -30,6 +37,10 @@ async function handler(req, res) {
     }
   }
   if (method === "DELETE") {
+    if (!token || token !== process.env.TOKEN) {
+      return res.status(401).json("Not authenticated");
+    }
+
     try {
       await Product.findByIdAndDelete(id);
       res.status(200).json("Product deleted");
