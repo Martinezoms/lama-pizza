@@ -6,7 +6,7 @@ import AddModal from "../components/AddModal";
 import Featured from "../components/Featured";
 import PizzaList from "../components/PizzaList";
 
-export default function Home({ pizzaList, admin }) {
+function Home({ pizzaList, admin }) {
   const [close, setClose] = useState(true);
   return (
     <div>
@@ -32,7 +32,7 @@ export const getServerSideProps = async (ctx) => {
     admin = true;
   }
 
-  const response = await axios.get("/api/products");
+  const response = await axios.get("http://localhost:3000/api/products/");
   return {
     props: {
       pizzaList: response.data,
@@ -40,3 +40,5 @@ export const getServerSideProps = async (ctx) => {
     }
   };
 };
+
+export default Home;
