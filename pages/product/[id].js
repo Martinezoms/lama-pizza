@@ -98,14 +98,15 @@ const Product = ({ pizza }) => {
   );
 };
 
-export const getServerSideProps = async ({ params }) => {
+export const getStaticProps = async ({ params }) => {
   try {
     const response = await axios.get(`/api/products/${params.id}`);
 
     return {
       props: {
         pizza: response.data
-      }
+      },
+      revalidate: 1
     };
   } catch (err) {
     console.log(err);
