@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
 import classes from "../styles/AddModal.module.css";
 
 const AddModal = ({ setClose }) => {
@@ -41,7 +40,7 @@ const AddModal = ({ setClose }) => {
         img: url
       };
 
-      await axios.post("http://localhost:3000/api/products", newProduct);
+      await axios.post("/api/products", newProduct);
       setClose(true);
     } catch (err) {
       console.log(err);
