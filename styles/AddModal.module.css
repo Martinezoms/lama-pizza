@@ -1,7 +1,7 @@
 .container {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(245, 240, 240, 0.52);
+  background-color: rgba(000, 000, 000, 0.52);
   position: fixed;
   top: 0;
   z-index: 999;
@@ -34,11 +34,6 @@
   position: absolute;
   top: -10px;
   right: -10px;
-}
-
-.close:hover {
-  opacity: 0.7;
-  transition: all 0.2s ease-in-out;
 }
 
 .item {

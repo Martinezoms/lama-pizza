@@ -4,7 +4,7 @@ import { useState } from "react";
 import classes from "../../styles/Login.module.css";
 
 const Login = () => {
-  const [user, setUser] = useState({ username: null, password: null });
+  const [user, setUser] = useState({ username: "", password: "" });
   const [error, setError] = useState(false);
   const router = useRouter();
 
@@ -12,10 +12,12 @@ const Login = () => {
     try {
       setError(false);
       await axios.post("http://localhost:3000/api/login", { ...user });
+
       router.push("/admin");
     } catch (err) {
       setError(true);
       console.log(err);
+      console.error("User unauthorized");
     }
   };
 

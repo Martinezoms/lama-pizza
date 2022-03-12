@@ -25,9 +25,10 @@ export default function Home({ pizzaList, admin }) {
 
 export const getServerSideProps = async (ctx) => {
   const myCookie = ctx.req?.cookies;
+
   let admin = false;
 
-  if (myCookie === process.env.TOKEN) {
+  if (myCookie.token === process.env.TOKEN) {
     admin = true;
   }
 

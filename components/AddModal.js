@@ -9,7 +9,7 @@ const AddModal = ({ setClose }) => {
   const [desc, setDesc] = useState(null);
   const [prices, setPrices] = useState([]);
   const [extraOptions, setExtraOptions] = useState([]);
-  const [extra, setExtra] = useState(null);
+  const [extra, setExtra] = useState({});
 
   const handleExtraInput = (e) => {
     setExtra({ ...extra, [e.target.name]: e.target.value });

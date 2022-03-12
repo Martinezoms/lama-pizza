@@ -9,7 +9,7 @@ const Footer = () => {
       </div>
       <div className={classes.item}>
         <div className={classes.card}>
-          <h2 className={classes.motto}>OH YES, WE DID.THE LAMA PIZZA, WELL BAKED SLICE OF PIZZA.</h2>
+          <h2 className={classes.motto}>OH YES, WE DID THE LAMA PIZZA, WELL BAKED SLICE OF PIZZA.</h2>
         </div>
         <div className={classes.card}>
           <h1 className={classes.title}>FIND OUR RESTAURANTS</h1>
