@@ -5,9 +5,6 @@ import AddButton from "../components/AddButton";
 import AddModal from "../components/AddModal";
 import Featured from "../components/Featured";
 import PizzaList from "../components/PizzaList";
-import dbConnect from "../util/mongo";
-import Product from "../models/Product";
-import { responseSymbol } from "next/dist/server/web/spec-compliant/fetch-event";
 
 function Home({ pizzaList, admin }) {
   const [close, setClose] = useState(true);
@@ -35,13 +32,11 @@ export const getServerSideProps = async (ctx) => {
     admin = true;
   }
 
-  await dbConnect();
-  const products = await Product.find();
-  const response = await JSON.parse(JSON.stringify(products));
+  const response = await axios.get("http://localhost:3000/api/products");
 
   return {
     props: {
-      pizzaList: response,
+      pizzaList: response.data,
       admin
     }
   };
