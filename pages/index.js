@@ -37,7 +37,7 @@ export const getServerSideProps = async (ctx) => {
     admin = true;
   }
 
-  const response = await axios.get(`${url}/api/products/`);
+  const response = await axios.get(`${url}/api/products`);
 
   return {
     props: {
