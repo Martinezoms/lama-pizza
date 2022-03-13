@@ -11,7 +11,7 @@ const Login = () => {
   const handleSignin = async () => {
     try {
       setError(false);
-      await axios.post("http://localhost:3000/api/login", { ...user });
+      await axios.post("/api/login", { ...user });
 
       router.push("/admin");
     } catch (err) {

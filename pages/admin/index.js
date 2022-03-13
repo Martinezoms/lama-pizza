@@ -10,7 +10,7 @@ const Index = ({ orders, products }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/products/${id}`);
+      await axios.delete(`/api/products/${id}`);
       setProductList(productList.filter((product) => product._id !== id));
     } catch (err) {
       console.log(err);
@@ -22,7 +22,7 @@ const Index = ({ orders, products }) => {
     const currentStatus = item.status;
 
     try {
-      const response = await axios.put(`http://localhost:3000/api/orders/${id}`, { status: currentStatus + 1 });
+      const response = await axios.put(`/api/orders/${id}`, { status: currentStatus + 1 });
 
       setOrderList([response.data, ...orderList.filter((order) => order._id !== id)]);
     } catch (err) {
@@ -103,6 +103,12 @@ const Index = ({ orders, products }) => {
 export const getServerSideProps = async (ctx) => {
   const myCookie = ctx.req?.cookies || "";
 
+  let url = process.env.DEV_URL;
+
+  if (process.env.NODE_ENV === "production") {
+    url = process.env.PROD_URL;
+  }
+
   if (myCookie.token !== process.env.TOKEN) {
     return {
       redirect: {
@@ -111,8 +117,8 @@ export const getServerSideProps = async (ctx) => {
       }
     };
   }
-  const productResponse = await axios.get("http://localhost:3000/api/products");
-  const orderResponse = await axios.get("http://localhost:3000/api/orders");
+  const productResponse = await axios.get(`${url}/api/products`);
+  const orderResponse = await axios.get(`${url}/api/orders`);
 
   return {
     props: {
