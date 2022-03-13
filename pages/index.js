@@ -39,8 +39,6 @@ export const getServerSideProps = async (ctx) => {
   const products = await Product.find();
   const response = await JSON.parse(JSON.stringify(products));
 
-  // const response = await fetch("http://localhost:3000/api/products");
-
   return {
     props: {
       pizzaList: response,
